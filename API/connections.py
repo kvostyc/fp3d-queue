@@ -1,6 +1,5 @@
 import json
 
-
 def load_config():
     with open("connections.json", "r") as config_file:
         config = json.load(config_file)

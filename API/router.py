@@ -1,7 +1,5 @@
 # Libraries
 from flask import *
-import serial
-import time
 
 # App
 from app import *
@@ -15,10 +13,6 @@ from Services.ConnectService import *
 # Connections
 from connections import config, get_printer_config
 
-""" ser = serial.Serial("COM6", 115200, timeout=2)
-ser.close() """
-
-
 @app.route("/", methods=["GET"])
 def home_page():
     data_set = {"Page": "Home"}
@@ -29,9 +23,6 @@ def home_page():
 
 @app.route("/event/", methods=["GET"])  # /event/?
 def printer():
-    """ ser.open() """
-    """ time.sleep(1) """
-
     printer_id = str(request.args.get("printer"))
     action_id = str(request.args.get("action"))
 
