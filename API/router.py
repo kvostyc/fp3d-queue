@@ -1,21 +1,53 @@
 # Libraries
 from flask import *
+import serial
+import time
+
 # App
 from app import *
+
 # Controllers
 from Controllers.EventController import *
 
+# Services
+from Services.ConnectService import *
+
+# Connections
+from connections import config, get_printer_config
+
+""" ser = serial.Serial("COM6", 115200, timeout=2)
+ser.close() """
+
+
 @app.route("/", methods=["GET"])
-def home_page(): 
-    data_set = {'Page': 'Home'}
+def home_page():
+    data_set = {"Page": "Home"}
     json_dump = json.dumps(data_set)
 
     return json_dump
 
-@app.route("/event/", methods=["GET"]) # /printer/?
-def printer():
-    printer_id = str(request.args.get("printer"))
-    event = str(request.args.get("event"))
 
-    controller = EventController(printer_id, event)
-    return controller.dispatch()
+@app.route("/event/", methods=["GET"])  # /event/?
+def printer():
+    """ ser.open() """
+    """ time.sleep(1) """
+
+    printer_id = str(request.args.get("printer"))
+    action_id = str(request.args.get("action"))
+
+    # Config init
+    printer_config = get_printer_config(config, int(printer_id))
+
+    if printer_config:
+        printer_id = printer_config["id"]
+        port = printer_config["port"]
+        baud_rate = printer_config["baud_rate"]
+        
+        connection = ConnectService(port, baud_rate, printer_id, action_id)
+
+        controller = EventController(printer_id, action_id, connection)
+        return controller.dispatch()
+    else:
+        data_set = {"response": "Tlačiareň sa nenachádza v configu"}
+        json_dump = json.dumps(data_set)
+        return json_dump

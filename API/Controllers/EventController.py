@@ -1,13 +1,17 @@
-import json
+import json, serial
 
 class EventController:
-    def __init__(self, printer, event):
+    def __init__(self, printer, action, connection):
         self.printer = printer
-        self.event = event
+        self.action = action
+
+        self.connection = connection
 
         self.dispatch()
     def dispatch(self):
-        data_set = {'Printer': self.printer, 'Event': self.event}
+        return self.connection.send()
+
+        """ data_set = {'Printer': self.printer, 'Action': self.action}
         json_dump = json.dumps(data_set)
 
-        return json_dump
+        return json_dump """

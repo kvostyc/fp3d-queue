@@ -1,0 +1,19 @@
+{
+    "printers": [
+        {
+            "id": "printer1",
+            "port": "COM6",
+            "baud_rate": 115200
+        },
+        {
+            "id": "printer2",
+            "port": "COM7",
+            "baud_rate": 115200
+        },
+        {
+            "id": "printer3",
+            "port": "COM8",
+            "baud_rate": 115200
+        }
+    ]
+}
