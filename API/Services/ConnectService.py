@@ -14,7 +14,6 @@ class ConnectService:
 
     def init(self):
         self.conn = serial.Serial(self.usb, self.baudrate, timeout=self.timeout) 
-        self.close()
 
     def close(self):
         self.conn.close()
@@ -23,7 +22,6 @@ class ConnectService:
         self.conn.open()
     
     def send(self):
-        self.open()
         time.sleep(1)
 
         data_to_send = f"{self.printer_id};{self.action_id}\n"
@@ -33,6 +31,4 @@ class ConnectService:
 
         data_set = {"response": response}
         json_dump = json.dumps(data_set)
-
-        self.close()
         return json_dump

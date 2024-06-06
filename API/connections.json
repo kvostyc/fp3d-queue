@@ -2,7 +2,7 @@
     "printers": [
         {
             "id": "printer1",
-            "port": "COM6",
+            "port": "COM3",
             "baud_rate": 115200
         },
         {
@@ -13,6 +13,11 @@
         {
             "id": "printer3",
             "port": "COM8",
+            "baud_rate": 115200
+        },
+        {
+            "id": "printer4",
+            "port": "COM3",
             "baud_rate": 115200
         }
     ]

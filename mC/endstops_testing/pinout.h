@@ -3,14 +3,14 @@
 #define POSITION_THREE     23
 #define POSITION_FOUR      25
 
-#define PLATE_BOX_ONE      27
-#define PLATE_BOX_TWO      29
-#define PLATE_BOX_THREE    31
+#define PLATE_BOX_ONE    27
+#define PLATE_BOX_TWO   29
+#define PLATE_BOX_THREE     31
 #define PLATE_BOX_FOUR     33
 #define PLATE_BOX_FIVE     35
-#define PLATE_BOX_SIX      37
-#define PLATE_BOX_SEVEN    39
-#define PLATE_BOX_EIGHT    43
+#define PLATE_BOX_SIX    37
+#define PLATE_BOX_SEVEN      39
+#define PLATE_BOX_EIGHT      43
 
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
