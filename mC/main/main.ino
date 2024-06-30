@@ -25,6 +25,8 @@ int PLATE_BOX_SIX_E=14;
 int PLATE_BOX_SEVEN_E=15;    
 int PLATE_BOX_EIGHT_E=16;
 
+int LIFT_UP=17;
+
 long lastStockStep;
 long initial_stock_homing = -1;
 long initial_stock_homing_up = 1;
@@ -197,7 +199,13 @@ void loop() {
     else if (receivedPrinterID == 1 && receivedEventID == POSITION_FOUR_E) 
     {  
       Serial.println("Akcia pro printerID 1 a eventID 1 bola vykonaná.");
-      homePlatform();
+      homePlate();
+      while (digitalRead(POSITION_FOUR)) 
+      {
+        platform.moveTo(initial_platform);
+        platform.runSpeed();  
+        initial_platform++;
+      }
     }
     else if (receivedPrinterID == 1 && receivedEventID == PLATE_BOX_ONE_E) 
     {  
@@ -257,6 +265,49 @@ void loop() {
         platform.moveTo(initial_platform);
         platform.runSpeed();  
         initial_platform++;
+      }
+    }
+    else if (receivedPrinterID == 1 && receivedEventID == PLATE_BOX_SEVEN_E)
+    {  
+      Serial.println("Akcia pro printerID 1 a eventID 1 bola vykonaná.");
+      homePlate();
+      while (digitalRead(PLATE_BOX_SEVEN)) 
+      {
+        platform.moveTo(initial_platform);
+        platform.runSpeed();  
+        initial_platform++;
+      }
+    }
+    else if (receivedPrinterID == 1 && receivedEventID == PLATE_BOX_EIGHT_E)
+    {  
+      Serial.println("Akcia pro printerID 1 a eventID 1 bola vykonaná.");
+      homePlate();
+      while (digitalRead(PLATE_BOX_EIGHT)) 
+      {
+        platform.moveTo(initial_platform);
+        platform.runSpeed();  
+        initial_platform++;
+      }
+    }
+    else if (receivedPrinterID == 1 && receivedEventID == LIFT_UP)
+    {  
+      Serial.println("Akcia pro printerID 1 a eventID 17 bola vykonaná.");
+      lift.setMaxSpeed(500);
+      lift.setAcceleration(500);
+      
+      long initial_lift = 0;
+    
+      lift.stop();
+    
+      while (lift.isRunning()) {
+        delay(1);
+      }
+    
+      while (initial_lift >= -80000) 
+      {
+        lift.moveTo(initial_lift);
+        lift.runSpeed();  
+        initial_lift--;
       }
     }
     Serial.flush();
